@@ -1,0 +1,11 @@
+version: '3'
+services:
+  nim:
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+    tty: true
+    ports: # ホストのポート:コンテナのポート
+      - 9000:5000
+    volumes:
+      - ./src/server:/root/project
