@@ -1,0 +1,23 @@
+version: '3'
+services:
+  https-portal:
+    image: steveltn/https-portal:1
+    tty: true
+    ports:
+      - '80:80'
+      - '443:443'
+    restart: always
+    environment:
+      # STAGE: production
+      STAGE: local
+      DOMAINS: '13.208.193.14 -> http://web:80'
+    volumes:
+      - ./docker/ssl_certs:/var/lib/https-portal # 鍵ファイルをホストとマウントする
+  web:
+    image: nginx:alpine
+    tty: true
+    environment:
+      TZ: "Asia/Tokyo"
+    volumes:
+      - ./docker/nginx/app.conf:/etc/nginx/conf.d/default.conf
+      - ./src/line-liff-v2-starter/public:/var/www/html
