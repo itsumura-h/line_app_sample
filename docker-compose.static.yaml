@@ -8,8 +8,9 @@ services:
       - '443:443'
     restart: always
     environment:
-      STAGE: production
+      # STAGE: production
       # STAGE: local
+      STAGE: staging
       DOMAINS: '13.208.193.14 -> http://web:80'
     volumes:
       - ./docker/ssl_certs:/var/lib/https-portal # 鍵ファイルをホストとマウントする
